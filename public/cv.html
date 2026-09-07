@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aqsa — Curriculum Vitae | DevOps & Cloud Engineer</title>
+  <meta name="description" content="Official Curriculum Vitae of Aqsa — DevOps Engineer, DevSecOps Specialist, and Cloud Infrastructure Architect." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #faf9f6;
+      --paper: #ffffff;
+      --text: #1e1b18;
+      --text-muted: #625c56;
+      --border: #e2ded8;
+      --accent: #262220;
+      --highlight: #edeae6;
+      --tag-bg: #f4f1ec;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="dark"] {
+      --bg: #181614;
+      --paper: #221f1d;
+      --text: #f3eee8;
+      --text-muted: #a8a098;
+      --border: #38332f;
+      --accent: #f3eee8;
+      --highlight: #2b2724;
+      --tag-bg: #2d2926;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding: 2rem 1rem;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Top Action Bar */
+    .action-bar {
+      max-width: 860px;
+      margin: 0 auto 1.5rem auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid var(--border);
+      background: var(--paper);
+      color: var(--text);
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    /* CV Paper Sheet */
+    .cv-paper {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      padding: 3.5rem 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Header */
+    .cv-header {
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    h1.name {
+      font-family: var(--font-serif);
+      font-size: 2.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+
+    .title {
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+    }
+
+    .contact-info {
+      text-align: right;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .contact-info a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* Section Styles */
+    .section {
+      margin-bottom: 2rem;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: var(--font-sans);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-title span.num {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    /* Summary */
+    .summary-text {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    /* Skills Grid */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+    }
+
+    .skills-table tr {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skills-table tr:last-child {
+      border-bottom: none;
+    }
+
+    .skills-cat {
+      width: 28%;
+      padding: 0.5rem 0.5rem 0.5rem 0;
+      font-weight: 600;
+      color: var(--text);
+      vertical-align: top;
+    }
+
+    .skills-list {
+      padding: 0.5rem 0;
+      color: var(--text-muted);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    /* Experience / Projects Items */
+    .entry {
+      margin-bottom: 1.25rem;
+    }
+
+    .entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.25rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .entry-title {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .entry-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .entry-title a:hover {
+      text-decoration: underline;
+    }
+
+    .entry-meta {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .entry-subtitle {
+      font-size: 0.8125rem;
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .entry-bullets {
+      list-style-type: none;
+      padding-left: 0;
+      font-size: 0.8125rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .entry-bullets li {
+      position: relative;
+      padding-left: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .entry-bullets li::before {
+      content: "▪";
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      line-height: 1.6;
+    }
+
+    .tech-badge {
+      display: inline-block;
+      font-size: 0.6875rem;
+      font-family: var(--font-mono);
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 0.1rem 0.4rem;
+      border-radius: 2px;
+      margin-top: 0.25rem;
+    }
+
+    /* Honors List */
+    .honors-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+      font-size: 0.8125rem;
+    }
+
+    .honor-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px dotted var(--border);
+    }
+
+    .honor-item:last-child {
+      border-bottom: none;
+    }
+
+    .honor-title {
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .honor-year {
+      font-weight: 600;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        padding: 0;
+        background: #fff !important;
+        color: #000 !important;
+      }
+
+      .action-bar {
+        display: none !important;
+      }
+
+      .cv-paper {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+
+      a {
+        color: #000 !important;
+        text-decoration: none !important;
+      }
+
+      .section {
+        page-break-inside: avoid;
+      }
+
+      @page {
+        margin: 12mm 15mm;
+        size: A4;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .cv-paper {
+        padding: 2rem 1.5rem;
+      }
+      .contact-info {
+        text-align: left;
+      }
+      .skills-table tr {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5rem 0;
+      }
+      .skills-cat {
+        width: 100%;
+        padding: 0 0 0.25rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Action Bar (Hidden on Print) -->
+  <div class="action-bar">
+    <div class="btn-group">
+      <a href="/" class="btn">← Back to Portfolio</a>
+    </div>
+    <div class="btn-group">
+      <a href="/aqsa-resume.pdf" download="Aqsa_Resume.pdf" class="btn">Download PDF ↓</a>
+      <button class="btn" id="theme-btn" onclick="toggleTheme()">Theme: Auto</button>
+      <button class="btn btn-primary" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </div>
+
+
+  <!-- Main CV Container -->
+  <div class="cv-paper">
+    
+    <!-- Header -->
+    <header class="cv-header">
+      <div class="header-top">
+        <div>
+          <h1 class="name">AQSA</h1>
+          <div class="title">DevOps Engineer · DevSecOps · Cloud Architect</div>
+        </div>
+        <div class="contact-info">
+          <div>Peshawar, Pakistan</div>
+          <div>Phone: <a href="tel:+923334408591">+92 333 4408591</a></div>
+          <div>Email: <a href="mailto:aksawadood@gmail.com">aksawadood@gmail.com</a></div>
+          <div>GitHub: <a href="https://github.com/aqsa890" target="_blank" rel="noreferrer">github.com/aqsa890</a></div>
+          <div>LinkedIn: <a href="https://www.linkedin.com/in/aqsa-~-3149782a2" target="_blank" rel="noreferrer">linkedin.com/in/aqsa-~-3149782a2</a></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Professional Summary -->
+    <section class="section">
+      <h2 class="section-title"><span class="num">01.</span> Professional Summary</h2>
+      <p class="summary-text">
+        Results-driven Engineer specialized in DevOps, DevSecOps, and Cloud Infrastructure. Hands-on expertise architecting automated CI/CD pipelines with GitHub Actions, containerizing microservices with Docker, and hardening multi-tier platforms to achieve 0 Critical/High vulnerabilities using Trivy and Docker Scout. Proficient in AWS cloud infrastructure, automating deployments via Bash/Python, integrating shift-left security gates (SAST, DAST, SCA, Secret Scanning, Linting), and monitoring system health.
+      </p>
+    </section>
+
+    <!-- Education -->
+    <section class="section">
+      <h2 class="section-title"><span class="num">02.</span> Education</h2>
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Bachelor of Science in Software Engineering (BSSE)</span>
+          <span class="entry-meta">2022 – 2026</span>
+        </div>
+        <div class="entry-subtitle">
+          City University of Science and Information Technology (CUSIT) — Peshawar, Pakistan · <strong>CGPA: 3.86 / 4.00 (High Honors)</strong>
+        </div>
+        <div class="summary-text" style="font-size: 0.8125rem; color: var(--text-muted);">
+          Core Coursework: Software Architecture, Database Design, Operating Systems, Computer Networks, and Cloud Computing.
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section class="section">
+      <h2 class="section-title"><span class="num">03.</span> Technical Arsenal & Skills</h2>
+      <table class="skills-table">
+        <tbody>
+          <tr>
+            <td class="skills-cat">DevSecOps & Security</td>
+            <td class="skills-list">SAST, DAST, SCA, Secret Scanning, Container Security, Trivy, Gitleaks, Docker Scout, SonarQube, Semgrep, Checkov, Actionlint, Quality Gates, Shift-Left Security</td>
+          </tr>
+          <tr>
+            <td class="skills-cat">CI/CD & Automation</td>
+            <td class="skills-list">GitHub Actions, Jenkins, Self-Hosted EC2 Runners, Multi-Job Pipelines, Dynamic SHA-Based Tagging, Docker Hub Registry, Argo CD (GitOps), Automated Testing & Linting</td>
+          </tr>
+          <tr>
+            <td class="skills-cat">Containers & Orchestration</td>
+            <td class="skills-list">Docker, Docker Compose, Kubernetes, Helm, Multi-Stage Builds, Image Optimization, Container Hardening, Non-Root Workloads, Alpine/Distroless Runtimes</td>
+          </tr>
+          <tr>
+            <td class="skills-cat">Cloud & AWS Infrastructure</td>
+            <td class="skills-list">AWS (EC2, VPC, S3, IAM, ALB, Auto Scaling Groups, NAT Gateway, Security Groups, NACLs, SSM, Route Tables, Launch Templates, User Data, AWS CLI)</td>
+          </tr>
+          <tr>
+            <td class="skills-cat">Observability & SRE</td>
+            <td class="skills-list">Prometheus, Grafana, Health Checks, Metrics Collection, Uptime & System Monitoring, Automated Alerting, Service Reliability, Incident Troubleshooting</td>
+          </tr>
+          <tr>
+            <td class="skills-cat">IaC & Automation</td>
+            <td class="skills-list">Terraform (Declarative IaC), Ansible (Config Management), Linux Administration (LVM, SSH, Process Management), Bash/Shell Scripting, Python Automation, Nginx Reverse Proxy</td>
+          </tr>
+          <tr>
+            <td class="skills-cat">Version Control & Workflow</td>
+            <td class="skills-list">Git, GitHub (Branch Protection, Pull Requests, Pre-Commit Hooks), Jira, Agile / Scrum, SDLC</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- DevOps Projects -->
+    <section class="section">
+      <h2 class="section-title"><span class="num">04.</span> DevOps, DevSecOps & Cloud Projects</h2>
+
+      <!-- Atelier Storefront -->
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">
+            <a href="https://github.com/aqsa890/atelier-storefront" target="_blank" rel="noreferrer">
+              Atelier Storefront — Full-Stack E-Commerce & Containerized Platform ↗
+            </a>
+          </span>
+          <span class="entry-meta">Production</span>
+        </div>
+        <div class="entry-subtitle">
+          Technologies: Docker, Multi-Stage Builds, FastAPI (Python), React, MongoDB Motor Async, Nginx Gateway, Pytest, Vitest
+        </div>
+        <ul class="entry-bullets">
+          <li>Architected production containerization with multi-stage Docker builds and Alpine runtimes, reducing frontend image size by 75% and backend to 60MB.</li>
+          <li>Engineered automated GitHub Actions CI/CD workflows executing linting, unit test suites (Pytest + Vitest), and dynamic SHA-based Docker Hub image publishing.</li>
+          <li>Constructed native MongoDB schema validation ($jsonSchema) and compound indexing guaranteeing sub-millisecond query execution and zero transactional inventory drift.</li>
+          <li>Configured production Nginx reverse proxy with SSL termination, gzip compression, and security headers.</li>
+        </ul>
+      </div>
+
+      <!-- Cloud-Native MicroDevSecOps -->
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">
+            <a href="https://github.com/aqsa890/SecretVault-devsecops" target="_blank" rel="noreferrer">
+              Cloud-Native MicroDevSecOps — Microservices Hardening & Vulnerability Remediation ↗
+            </a>
+          </span>
+          <span class="entry-meta">Production Hardened</span>
+        </div>
+        <div class="entry-subtitle">
+          Technologies: Trivy, Docker Scout, Gitleaks, Python/FastAPI, React SPA, PostgreSQL Alpine, Nginx Gateway
+        </div>
+        <ul class="entry-bullets">
+          <li>Hardened distributed 5-tier microservices architecture (Frontend, API Gateway, Product Catalog, PostgreSQL, Nginx), eliminating 235+ vulnerabilities to achieve 0 Critical, 0 High, and 0 OS vulnerabilities using Trivy and Docker Scout.</li>
+          <li>Enforced least-privilege non-root execution (USER 10001) across all workloads with read-only root filesystems and capability drops.</li>
+          <li>Configured Nginx API Gateway routing with strict HTTP security headers, CORS origin enforcement, and automated endpoint health checking.</li>
+        </ul>
+      </div>
+
+      <!-- VibeGram Media Platform -->
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">
+            <a href="https://github.com/aqsa890" target="_blank" rel="noreferrer">
+              VibeGram — Scalable Media Streaming Platform & Containerized Infrastructure ↗
+            </a>
+          </span>
+          <span class="entry-meta">Distributed Cloud</span>
+        </div>
+        <div class="entry-subtitle">
+          Technologies: Docker Compose, Redis Caching, Node/Python API, Volume Persistence, Health Probes, SAST/SCA
+        </div>
+        <ul class="entry-bullets">
+          <li>Engineered containerized high-throughput social media infrastructure with asynchronous media queueing and image processing workers.</li>
+          <li>Configured Docker Compose orchestration with isolated internal bridge networks, volume mounts for persistent media, and automated rolling restart policies.</li>
+          <li>Integrated static code analysis (SAST) and software composition analysis (SCA) directly into the pull request merge gate.</li>
+        </ul>
+      </div>
+
+      <!-- Maternity Hub -->
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">
+            <a href="https://devpost.com/software/maternity-hub" target="_blank" rel="noreferrer">
+              Maternity Hub — Emergency Healthcare Telemetry & Cloud Backend ↗
+            </a>
+          </span>
+          <span class="entry-meta">Devpost Finalist</span>
+        </div>
+        <div class="entry-subtitle">
+          Technologies: Cloud Firestore, Real-Time Location Telemetry, AI Triage Microservice, Google Cloud Platform
+        </div>
+        <ul class="entry-bullets">
+          <li>Engineered resilient real-time cloud telemetry backend with Firebase Firestore streaming for instant emergency triage and automated alert dispatching.</li>
+          <li>Implemented automated health-check escalation policies and high-availability messaging queues for zero message loss during critical alerts.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Professional Experience -->
+    <section class="section">
+      <h2 class="section-title"><span class="num">05.</span> Professional Experience</h2>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Office of Research, Innovation & Commercialization (ORIC) — CUSIT</span>
+          <span class="entry-meta">Nov 2025 – Jan 2026</span>
+        </div>
+        <div class="entry-subtitle">Research & Project Management Intern · Peshawar, Pakistan</div>
+        <ul class="entry-bullets">
+          <li>Assisted in administering university cloud research and innovation initiatives under faculty supervision, preparing technical documentation and grant milestone tracking.</li>
+          <li>Coordinated university-industry commercialization efforts, technology transfer documentation, and academic event governance.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Developers Hub Corporation</span>
+          <span class="entry-meta">Jun 2025 – Jul 2025</span>
+        </div>
+        <div class="entry-subtitle">Mobile Application Developer Intern · Peshawar, Pakistan</div>
+        <ul class="entry-bullets">
+          <li>Engineered modular cross-platform mobile application interfaces in Flutter with responsive rendering across varied screen sizes and form factors.</li>
+          <li>Connected client applications to Firebase real-time database and authentication services with persistent state handling.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">Codveda Technologies</span>
+          <span class="entry-meta">May 2025 – Jun 2025</span>
+        </div>
+        <div class="entry-subtitle">Full Stack Developer Intern · Peshawar, Pakistan</div>
+        <ul class="entry-bullets">
+          <li>Constructed responsive web interfaces and integrated Node.js backend RESTful endpoints with role-based access control (RBAC).</li>
+          <li>Implemented secure token handling, session lifecycles, and database CRUD transaction flows.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <span class="entry-title">DevSpire Solutions</span>
+          <span class="entry-meta">Feb 2025 – May 2025</span>
+        </div>
+        <div class="entry-subtitle">Web Developer Intern · Peshawar, Pakistan</div>
+        <ul class="entry-bullets">
+          <li>Developed dynamic web application features connected to structured MySQL relational databases.</li>
+          <li>Maintained Git version control discipline through feature branching, pull requests, and peer code reviews in Agile sprints.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Honors & Leadership -->
+    <section class="section">
+      <h2 class="section-title"><span class="num">06.</span> Honors, Awards & Leadership</h2>
+      <div class="honors-grid">
+        <div class="honor-item">
+          <div>
+            <div class="honor-title">Pakistan Youth Leadership Initiative (PYLI 2025)</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Selected for 4-day intensive leadership program organized by British Council, WaterAid & IDEA Pakistan</div>
+          </div>
+          <div class="honor-year">2025</div>
+        </div>
+        <div class="honor-item">
+          <div>
+            <div class="honor-title">6th International Conference on Emerging Trends (CUSIT 2025)</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Presented telemetry platform research to international academic panel & served on organizing committee</div>
+          </div>
+          <div class="honor-year">2025</div>
+        </div>
+        <div class="honor-item">
+          <div>
+            <div class="honor-title">6th Student Talent Expo Peshawar (2025)</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Showcased smart transportation platform innovation and business model to industry juries</div>
+          </div>
+          <div class="honor-year">2025</div>
+        </div>
+        <div class="honor-item">
+          <div>
+            <div class="honor-title">Skillathon Competition (CUSIT 2024)</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Demonstrated hands-on computer network engineering and network topology simulation via Cisco Packet Tracer</div>
+          </div>
+          <div class="honor-year">2024</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const btn = document.getElementById('theme-btn');
+      if (current === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        btn.textContent = 'Theme: Light';
+        localStorage.setItem('aqsa-cv-theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        btn.textContent = 'Theme: Dark';
+        localStorage.setItem('aqsa-cv-theme', 'dark');
+      }
+    }
+
+    // Auto-detect system preference
+    (function() {
+      const saved = localStorage.getItem('aqsa-cv-theme');
+      const btn = document.getElementById('theme-btn');
+      if (saved) {
+        document.documentElement.setAttribute('data-theme', saved);
+        btn.textContent = 'Theme: ' + (saved === 'dark' ? 'Dark' : 'Light');
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        btn.textContent = 'Theme: Dark';
+      }
+    })();
+  </script>
+</body>
+</html>
