@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 import Header from './components/Header';
 import ScrollProgress from './components/ScrollProgress';
@@ -16,6 +16,8 @@ if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+const PANELS = ['home', 'about', 'work', 'skills', 'experience', 'contact'];
+
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState('home');
@@ -29,7 +31,7 @@ export default function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1200);
+    }, 1000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -45,10 +47,15 @@ export default function App() {
       const isDesktop = window.innerWidth >= 768;
 
       if (isDesktop) {
-        const getScrollDistance = () => track.scrollWidth - window.innerWidth;
+        // Calibrate horizontal scroll distance so desktop/laptop scrolling is fast, fluid, and natural
+        // Eliminates the "turtle-slow" issue on laptops and standard mice
+        const getScrollDistance = () => {
+          const vw = window.innerWidth;
+          return Math.max(1500, Math.min(2400, Math.round(vw * 1.35)));
+        };
 
         const tween = gsap.to(track, {
-          x: () => -getScrollDistance(),
+          x: () => -(track.scrollWidth - window.innerWidth),
           ease: 'none'
         });
 
@@ -58,18 +65,17 @@ export default function App() {
           end: () => `+=${getScrollDistance()}`,
           pin: true,
           animation: tween,
-          scrub: 0.8,
+          scrub: 0.15, // Immediate, responsive, zero-lag scrub
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             setScrollProgress(self.progress);
 
             // Determine active panel based on progress
-            const panels = ['home', 'about', 'work', 'skills', 'experience', 'contact'];
             const index = Math.min(
-              panels.length - 1,
-              Math.floor(self.progress * panels.length + 0.15)
+              PANELS.length - 1,
+              Math.floor(self.progress * PANELS.length + 0.15)
             );
-            setActiveSection(panels[index] || 'home');
+            setActiveSection(PANELS[index] || 'home');
           }
         });
 
@@ -78,18 +84,19 @@ export default function App() {
         // Mobile listener for touch scroll progress
         const handleMobileScroll = () => {
           if (!track) return;
-          const maxScroll = track.scrollWidth - track.clientWidth;
+          const maxScroll = track.scrollHeight - track.clientHeight;
           if (maxScroll > 0) {
-            const progress = track.scrollLeft / maxScroll;
+            const progress = track.scrollTop / maxScroll;
             setScrollProgress(progress);
 
-            const panels = ['home', 'about', 'work', 'skills', 'experience', 'contact'];
-            const panelWidth = track.clientWidth;
-            const index = Math.min(
-              panels.length - 1,
-              Math.round(track.scrollLeft / panelWidth)
-            );
-            setActiveSection(panels[index] || 'home');
+            const scrollPos = track.scrollTop + 100;
+            for (let i = PANELS.length - 1; i >= 0; i--) {
+              const el = document.getElementById(PANELS[i]);
+              if (el && el.offsetTop <= scrollPos) {
+                setActiveSection(PANELS[i]);
+                break;
+              }
+            }
           }
         };
 
@@ -98,11 +105,16 @@ export default function App() {
       }
     }, containerRef);
 
-    // Trackpad horizontal wheel support on desktop
+    // Trackpad horizontal wheel support & mouse-wheel normalization for Windows laptops
     const handleWheel = (e) => {
       if (window.innerWidth >= 768) {
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 4) {
-          window.scrollBy({ top: e.deltaX * 0.8, behavior: 'auto' });
+        // Two-finger horizontal trackpad swipe
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY) && Math.abs(e.deltaX) > 2) {
+          e.preventDefault();
+          window.scrollBy({ top: e.deltaX * 1.8, behavior: 'auto' });
+        } else if (e.deltaMode === 1) {
+          // Windows / external mouse wheel with line ticks — boost scroll travel
+          window.scrollBy({ top: e.deltaY * 20, behavior: 'auto' });
         }
       }
     };
@@ -149,18 +161,18 @@ export default function App() {
     } else {
       targetEl.scrollIntoView({
         behavior: 'smooth',
-        inline: 'start',
-        block: 'nearest'
+        block: 'start'
       });
     }
   };
 
   const navigateToNextSection = (direction = 1) => {
-    const panels = ['home', 'about', 'work', 'skills', 'experience', 'contact'];
-    const currentIndex = panels.indexOf(activeSection);
-    const nextIndex = Math.min(panels.length - 1, Math.max(0, currentIndex + direction));
-    navigateToSection(panels[nextIndex]);
+    const currentIndex = PANELS.indexOf(activeSection);
+    const nextIndex = Math.min(PANELS.length - 1, Math.max(0, currentIndex + direction));
+    navigateToSection(PANELS[nextIndex]);
   };
+
+  const currentIdx = PANELS.indexOf(activeSection);
 
   return (
     <>
@@ -181,7 +193,6 @@ export default function App() {
         </div>
       </div>
 
-
       {/* Main Website Frame */}
       <div className="relative w-full min-h-screen bg-[#262220] overflow-x-hidden">
         
@@ -194,19 +205,46 @@ export default function App() {
           activeSection={activeSection} 
         />
 
+        {/* Desktop Quick Chapter Navigation Arrows */}
+        <div 
+          className="hidden md:flex fixed bottom-6 right-8 z-40 items-center gap-2 bg-[#1e1b19]/85 backdrop-blur-md border border-[#5a524d]/40 rounded-full px-3 py-1.5 text-xs font-mono text-[#f3eee8] shadow-lg select-none"
+          aria-label="Desktop Chapter Navigation"
+        >
+          <button
+            onClick={() => navigateToNextSection(-1)}
+            disabled={currentIdx === 0}
+            className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-[#38332f] disabled:opacity-30 disabled:hover:bg-transparent transition-colors cursor-pointer"
+            title="Previous Chapter (←)"
+          >
+            <ChevronLeft size={16} />
+          </button>
+
+          <span className="text-[11px] tracking-widest text-[#8a8178] px-1 font-mono uppercase">
+            {currentIdx + 1} / {PANELS.length}
+          </span>
+
+          <button
+            onClick={() => navigateToNextSection(1)}
+            disabled={currentIdx === PANELS.length - 1}
+            className="w-7 h-7 flex items-center justify-center rounded-full hover:bg-[#38332f] disabled:opacity-30 disabled:hover:bg-transparent transition-colors cursor-pointer"
+            title="Next Chapter (→)"
+          >
+            <ChevronRight size={16} />
+          </button>
+        </div>
+
         {/* Horizontal Pin Wrapper */}
         <div 
           ref={containerRef}
           className="relative w-full md:h-screen overflow-hidden"
           id="site-horizontal-story"
         >
-          {/* Horizontal Track (translates along X on desktop, snap scroll on mobile) */}
+          {/* Track: horizontal scroll on desktop, vertical flow on mobile */}
           <div 
             ref={trackRef}
-            className="flex flex-col md:flex-row md:flex-nowrap md:h-screen w-full md:w-max overflow-x-auto md:overflow-hidden snap-x snap-mandatory scroll-smooth no-scrollbar"
+            className="flex flex-col md:flex-row md:flex-nowrap md:h-screen w-full md:w-max overflow-y-auto md:overflow-hidden no-scrollbar"
             style={{ willChange: 'transform' }}
           >
-
             <Hero onScrollNext={() => navigateToSection('about')} />
             <About onNavigateWork={() => navigateToSection('work')} />
             <Work />
