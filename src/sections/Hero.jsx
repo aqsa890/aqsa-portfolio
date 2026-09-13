@@ -61,17 +61,17 @@ const Hero = ({ onScrollNext }) => {
       className="panel relative flex flex-col justify-between w-full md:w-[100vw] shrink-0 min-h-screen md:h-screen pt-20 pb-8 px-6 md:pl-28 md:pr-16 md:py-12 bg-[#262220] text-[#f3eee8] overflow-hidden select-none"
     >
       {/* Top Meta Line (Always fully visible below fixed navbar on mobile) */}
-      <div className="flex items-center justify-between border-b border-[#5a524d] pb-3 mb-2 md:mb-0">
-        <div className="flex items-center gap-2.5">
-          <span className="font-serif text-xs md:text-sm uppercase tracking-widest text-[#f3eee8]">
+      <div className="flex items-center justify-between border-b border-[#5a524d] pb-3 mb-2 md:mb-0 shrink-0 w-full">
+        <div className="flex items-center gap-2 sm:gap-2.5 whitespace-nowrap">
+          <span className="font-serif text-xs md:text-sm uppercase tracking-widest text-[#f3eee8] whitespace-nowrap">
             Folio — 2026 Edition
           </span>
-          <span className="text-[#8a8178]">·</span>
-          <span className="font-mono text-[10px] md:text-xs text-[#8a8178] uppercase">
+          <span className="hidden sm:inline text-[#8a8178]">·</span>
+          <span className="hidden sm:inline font-mono text-[10px] md:text-xs text-[#8a8178] uppercase whitespace-nowrap">
             DevSecOps & Cloud
           </span>
         </div>
-        <div className="flex items-center gap-2 text-[10px] md:text-xs font-mono text-[#8a8178]">
+        <div className="flex items-center gap-2 text-[10px] md:text-xs font-mono text-[#8a8178] whitespace-nowrap">
           <span className="hidden sm:inline">PK (GMT+5)</span>
           <span className="text-[#f3eee8] font-bold">{formattedTime}</span>
         </div>

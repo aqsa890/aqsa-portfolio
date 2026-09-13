@@ -26,16 +26,16 @@ export default function Contact() {
       className="panel relative flex flex-col justify-between w-full md:w-[100vw] shrink-0 min-h-screen md:h-screen bg-[#1f1d1b] text-[#f3eee8] px-5 pt-20 pb-28 md:px-20 md:py-14 overflow-y-auto md:overflow-hidden select-none"
     >
       {/* Top Header */}
-      <div className="flex items-center justify-between border-b border-[#5a524d] pb-3 mb-6 md:mb-8">
-        <div className="flex items-center gap-3 md:gap-4">
-          <span className="font-serif text-base md:text-xl font-normal uppercase leading-none tracking-tight text-[#f3eee8]">
+      <div className="flex items-center justify-between border-b border-[#5a524d] pb-3 mb-6 md:mb-8 shrink-0 w-full">
+        <div className="flex items-baseline gap-2 sm:gap-4">
+          <span className="font-serif text-base sm:text-lg md:text-xl font-normal uppercase leading-none tracking-tight text-[#f3eee8] whitespace-nowrap">
             Final Chapter
           </span>
-          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono">
+          <span className="hidden sm:inline text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono whitespace-nowrap">
             — 05. Collaboration
           </span>
         </div>
-        <div className="flex items-center gap-2 text-[10px] md:text-xs font-mono uppercase text-[#8a8178]">
+        <div className="flex items-center gap-2 text-[10px] sm:text-xs font-mono uppercase text-[#8a8178] whitespace-nowrap">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span className="hidden sm:inline">Open for Global Roles & Infrastructure Projects</span>
           <span className="sm:hidden">Available</span>

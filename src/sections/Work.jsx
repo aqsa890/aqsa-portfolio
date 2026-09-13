@@ -102,19 +102,20 @@ export default function Work() {
       className="panel relative flex flex-col justify-between w-full md:w-[130vw] lg:w-[115vw] shrink-0 min-h-screen md:h-screen bg-[#edeae6] text-[#2e2b28] px-5 pt-20 pb-8 md:px-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
     >
       {/* Top Header */}
-      <div className="flex items-center justify-between border-b border-[#b8b3ac] pb-3 mb-6 shrink-0">
-        <div className="flex items-center gap-3">
-          <span className="font-serif text-lg md:text-xl font-normal uppercase leading-none tracking-tight">
+      <div className="flex items-center justify-between border-b border-[#b8b3ac] pb-3 mb-4 md:mb-6 shrink-0 w-full">
+        <div className="flex items-baseline gap-2 sm:gap-4">
+          <span className="font-serif text-base sm:text-lg md:text-xl font-normal uppercase leading-none tracking-tight whitespace-nowrap">
             Chapter II
           </span>
-          <span className="text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono">
+          <span className="hidden sm:inline text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono whitespace-nowrap">
             — Selected DevOps & Cloud Works
           </span>
         </div>
-        <div className="hidden md:flex items-center gap-2 text-xs font-mono uppercase text-[#8a8178]">
-          <span>04 Featured Projects</span>
-          <span>·</span>
-          <span>Shift-Left & Cloud Native</span>
+        <div className="flex items-center gap-2 text-[10px] sm:text-xs font-mono uppercase text-[#8a8178] whitespace-nowrap">
+          <span className="sm:hidden">02. Selected Work</span>
+          <span className="hidden md:inline">04 Featured Projects</span>
+          <span className="hidden md:inline">·</span>
+          <span className="hidden sm:inline md:inline">Shift-Left & Cloud Native</span>
         </div>
       </div>
 

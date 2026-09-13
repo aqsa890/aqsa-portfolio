@@ -32,16 +32,16 @@ const About = ({ onNavigateWork }) => {
       className="panel relative flex flex-col justify-between w-full md:w-[100vw] shrink-0 min-h-screen md:h-screen bg-[#faf9f6] text-[#262220] px-5 pt-20 pb-8 md:pl-28 md:pr-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
     >
       {/* Header Row */}
-      <div className="flex justify-between items-center border-b border-[#262220]/10 pb-3 mb-4 md:mb-6">
-        <div className="flex items-center gap-3 md:gap-4">
-          <span className="font-serif text-base md:text-xl font-normal uppercase leading-none tracking-tight text-[#262220]">
+      <div className="flex justify-between items-center border-b border-[#262220]/10 pb-3 mb-4 md:mb-6 shrink-0 w-full">
+        <div className="flex items-baseline gap-2 sm:gap-4">
+          <span className="font-serif text-base sm:text-lg md:text-xl font-normal uppercase leading-none tracking-tight text-[#262220] whitespace-nowrap">
             Chapter I
           </span>
-          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono">
+          <span className="hidden sm:inline text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono whitespace-nowrap">
             — Engineering Philosophy
           </span>
         </div>
-        <span className="text-[10px] md:text-xs uppercase tracking-widest font-mono text-[#8a8178]">
+        <span className="text-[10px] sm:text-xs uppercase tracking-widest font-mono text-[#8a8178] whitespace-nowrap">
           01. Quick Intro
         </span>
       </div>
@@ -88,7 +88,7 @@ const About = ({ onNavigateWork }) => {
             animate={isInView ? "visible" : "hidden"}
           >
             {/* Mobile Low-Text Version */}
-            <div className="block md:hidden">
+            <div className="block md:hidden text-center sm:text-left">
               <motion.h3 
                 variants={fadeUp} 
                 className="font-serif text-base font-normal leading-snug tracking-tight text-[#262220] mb-2"
@@ -116,7 +116,7 @@ const About = ({ onNavigateWork }) => {
             </div>
             
             {/* Action link */}
-            <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 md:gap-6">
+            <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center sm:justify-start gap-4 md:gap-6">
               <button 
                 onClick={onNavigateWork}
                 className="inline-flex items-center gap-2 group text-[11px] md:text-xs font-mono uppercase tracking-widest border-b border-[#262220] pb-1 hover:text-[#8a8178] hover:border-[#8a8178] transition-colors cursor-pointer"
@@ -138,24 +138,24 @@ const About = ({ onNavigateWork }) => {
             {/* Bio Details Grid */}
             <motion.div 
               variants={fadeUp} 
-              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-6 md:mt-8 pt-5 border-t border-[#262220]/10 text-[11px] md:text-xs font-mono"
+              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-6 md:mt-8 pt-5 border-t border-[#262220]/10 text-[11px] md:text-xs font-mono max-w-md mx-auto sm:max-w-none w-full"
             >
-              <div className="flex flex-col">
+              <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
                 <span className="text-[#8a8178] mb-0.5 uppercase tracking-widest text-[9px] md:text-[10px]">Education</span>
                 <span className="font-semibold text-[#262220]">BSSE, CUSIT</span>
                 <span className="text-[#5a524d]">2022 – 2026</span>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
                 <span className="text-[#8a8178] mb-0.5 uppercase tracking-widest text-[9px] md:text-[10px]">Academics</span>
                 <span className="font-semibold text-[#262220]">CGPA: 3.86 / 4.00</span>
                 <span className="text-[#5a524d]">High Honors</span>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
                 <span className="text-[#8a8178] mb-0.5 uppercase tracking-widest text-[9px] md:text-[10px]">Location</span>
                 <span className="font-semibold text-[#262220]">Peshawar, PK</span>
                 <span className="text-[#5a524d]">GMT+5 Timezone</span>
               </div>
-              <div className="flex flex-col">
+              <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
                 <span className="text-[#8a8178] mb-0.5 uppercase tracking-widest text-[9px] md:text-[10px]">Primary Focus</span>
                 <span className="font-semibold text-[#262220]">DevSecOps & AWS</span>
                 <span className="text-[#5a524d]">Docker / K8s / IaC</span>

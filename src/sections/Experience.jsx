@@ -94,16 +94,16 @@ export default function Experience() {
       className="panel relative flex flex-col justify-between w-full md:w-[130vw] lg:w-[115vw] shrink-0 min-h-screen md:h-screen bg-[#faf9f6] text-[#262220] px-5 pt-20 pb-8 md:pl-28 md:pr-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
     >
       {/* Top Header */}
-      <div className="flex items-center justify-between border-b border-[#262220]/10 pb-3 mb-4 md:mb-6">
-        <div className="flex items-center gap-3 md:gap-4">
-          <span className="font-serif text-base md:text-xl font-normal uppercase leading-none tracking-tight text-[#262220]">
+      <div className="flex items-center justify-between border-b border-[#262220]/10 pb-3 mb-4 md:mb-6 shrink-0 w-full">
+        <div className="flex items-baseline gap-2 sm:gap-4">
+          <span className="font-serif text-base sm:text-lg md:text-xl font-normal uppercase leading-none tracking-tight text-[#262220] whitespace-nowrap">
             Chapter IV
           </span>
-          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono">
+          <span className="hidden sm:inline text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono whitespace-nowrap">
             — Journey & Track Record
           </span>
         </div>
-        <span className="text-[10px] md:text-xs uppercase tracking-widest font-mono text-[#8a8178]">
+        <span className="text-[10px] sm:text-xs uppercase tracking-widest font-mono text-[#8a8178] whitespace-nowrap">
           04. Experience
         </span>
       </div>

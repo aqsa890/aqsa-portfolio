@@ -79,16 +79,16 @@ export default function Skills() {
       className="panel relative flex flex-col justify-between w-full md:w-[125vw] lg:w-[110vw] shrink-0 min-h-screen md:h-screen bg-[#262220] text-[#f3eee8] px-5 pt-20 pb-8 md:pl-28 md:pr-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
     >
       {/* Top Header */}
-      <div className="flex items-center justify-between border-b border-[#5a524d] pb-3 mb-3 md:mb-6">
-        <div className="flex items-center gap-3 md:gap-4">
-          <span className="font-serif text-base md:text-xl font-normal uppercase leading-none tracking-tight text-[#f3eee8]">
+      <div className="flex items-center justify-between border-b border-[#5a524d] pb-3 mb-3 md:mb-6 shrink-0 w-full">
+        <div className="flex items-baseline gap-2 sm:gap-4">
+          <span className="font-serif text-base sm:text-lg md:text-xl font-normal uppercase leading-none tracking-tight text-[#f3eee8] whitespace-nowrap">
             Chapter III
           </span>
-          <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono">
+          <span className="hidden sm:inline text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono whitespace-nowrap">
             — Technical Arsenal
           </span>
         </div>
-        <span className="text-[10px] md:text-xs uppercase tracking-widest font-mono text-[#8a8178]">
+        <span className="text-[10px] sm:text-xs uppercase tracking-widest font-mono text-[#8a8178] whitespace-nowrap">
           03. Capabilities
         </span>
       </div>
