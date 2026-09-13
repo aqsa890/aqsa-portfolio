@@ -95,7 +95,7 @@ export default function Work() {
   return (
     <section 
       id="work" 
-      className="panel relative flex flex-col justify-between w-full md:w-[130vw] lg:w-[115vw] shrink-0 min-h-screen md:h-screen bg-[#edeae6] text-[#2e2b28] px-5 py-10 md:px-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
+      className="panel relative flex flex-col justify-between w-full md:w-[130vw] lg:w-[115vw] shrink-0 min-h-screen md:h-screen bg-[#edeae6] text-[#2e2b28] px-5 pt-20 pb-8 md:px-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
     >
       {/* Top Header */}
       <div className="flex items-center justify-between border-b border-[#b8b3ac] pb-3 mb-6 shrink-0">

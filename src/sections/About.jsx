@@ -29,7 +29,7 @@ const About = ({ onNavigateWork }) => {
     <section 
       id="about" 
       ref={ref}
-      className="panel relative flex flex-col justify-between w-full md:w-[100vw] shrink-0 min-h-screen md:h-screen bg-[#faf9f6] text-[#262220] px-5 py-8 md:pl-28 md:pr-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
+      className="panel relative flex flex-col justify-between w-full md:w-[100vw] shrink-0 min-h-screen md:h-screen bg-[#faf9f6] text-[#262220] px-5 pt-20 pb-8 md:pl-28 md:pr-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
     >
       {/* Header Row */}
       <div className="flex justify-between items-center border-b border-[#262220]/10 pb-3 mb-4 md:mb-6">

@@ -83,7 +83,7 @@ export default function Experience() {
   return (
     <section 
       id="experience" 
-      className="panel relative flex flex-col justify-between w-full md:w-[130vw] lg:w-[115vw] shrink-0 min-h-screen md:h-screen bg-[#faf9f6] text-[#262220] px-5 py-8 md:pl-28 md:pr-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
+      className="panel relative flex flex-col justify-between w-full md:w-[130vw] lg:w-[115vw] shrink-0 min-h-screen md:h-screen bg-[#faf9f6] text-[#262220] px-5 pt-20 pb-8 md:pl-28 md:pr-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
     >
       {/* Top Header */}
       <div className="flex items-center justify-between border-b border-[#262220]/10 pb-3 mb-4 md:mb-6">
