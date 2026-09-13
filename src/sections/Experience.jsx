@@ -6,8 +6,10 @@ const experienceData = [
   {
     role: "ORIC Research & Project Intern",
     company: "Office of Research, Innovation & Commercialization (ORIC) — CUSIT",
+    shortCompany: "ORIC — CUSIT",
     date: "Nov 2025 – Jan 2026",
     location: "Peshawar, Pakistan",
+    mobileSummary: "Administered university cloud research programs and milestone deliverables.",
     bullets: [
       "Assisted in administering university cloud research and innovation initiatives under faculty supervision, preparing technical documentation and milestone deliverables.",
       "Coordinated university-industry commercialization efforts, technology transfer documentation, and academic event governance."
@@ -16,8 +18,10 @@ const experienceData = [
   {
     role: "Mobile Application Developer Intern",
     company: "Developers Hub Corporation",
+    shortCompany: "Developers Hub Corp",
     date: "Jun 2025 – Jul 2025",
     location: "Peshawar, Pakistan",
+    mobileSummary: "Engineered cross-platform mobile interfaces connected to cloud backends.",
     bullets: [
       "Engineered cross-platform mobile interfaces connected to cloud backends, handling real-time data streaming and offline persistence.",
       "Collaborated in Agile development cycles, debugging runtime client bottlenecks and optimizing UI rendering performance."
@@ -26,8 +30,10 @@ const experienceData = [
   {
     role: "Full Stack Developer Intern",
     company: "Codveda Technologies",
+    shortCompany: "Codveda Technologies",
     date: "May 2025 – Jun 2025",
     location: "Peshawar, Pakistan",
+    mobileSummary: "Constructed dynamic REST API microservices with role-based access control.",
     bullets: [
       "Constructed dynamic user interfaces and backend REST API microservices with role-based access control (RBAC).",
       "Participated in continuous integration pipelines, database migration scripts, and code review standards."
@@ -36,8 +42,10 @@ const experienceData = [
   {
     role: "Web Developer Intern",
     company: "DevSpire Solutions",
+    shortCompany: "DevSpire Solutions",
     date: "Feb 2025 – May 2025",
     location: "Peshawar, Pakistan",
+    mobileSummary: "Developed database-driven web features with automated Git CI workflows.",
     bullets: [
       "Developed server-rendered dynamic web features connected to structured relational databases.",
       "Maintained version control discipline through Git branch protection, pull requests, and automated linting."
@@ -136,29 +144,29 @@ export default function Experience() {
               return (
                 <div 
                   key={index}
-                  className="border border-[#262220]/15 rounded-sm p-3.5 bg-white shadow-sm"
+                  className="border border-[#262220]/15 rounded-sm p-3 bg-white shadow-sm"
                 >
-                  <div className="flex items-start justify-between gap-2 mb-1">
+                  <div className="flex items-start justify-between gap-2 mb-0.5">
                     <h4 className="font-serif text-sm font-medium text-[#262220] leading-snug">
                       {exp.role}
                     </h4>
-                    <span className="font-mono text-[10px] text-[#8a8178] bg-[#edeae6] px-1.5 py-0.5 rounded shrink-0">
+                    <span className="font-mono text-[9px] text-[#8a8178] bg-[#edeae6] px-1.5 py-0.5 rounded shrink-0">
                       {exp.date}
                     </span>
                   </div>
 
-                  <p className="text-[11px] font-mono text-[#5a524d] mb-2">
-                    {exp.company}
+                  <p className="text-[10px] font-mono text-[#8a8178] mb-1.5">
+                    {exp.shortCompany || exp.company}
                   </p>
 
-                  {/* Primary highlight */}
-                  <p className="text-xs text-[#3a3532] leading-relaxed">
-                    {exp.bullets[0]}
+                  {/* Primary concise highlight */}
+                  <p className="text-[11px] text-[#3a3532] leading-snug">
+                    {exp.mobileSummary || exp.bullets[0]}
                   </p>
 
                   {/* Expandable secondary bullets */}
                   {isExpanded && exp.bullets.length > 1 && (
-                    <div className="mt-2 pt-2 border-t border-[#262220]/10 text-xs text-[#5a524d] space-y-1">
+                    <div className="mt-2 pt-2 border-t border-[#262220]/10 text-[11px] text-[#5a524d] space-y-1">
                       {exp.bullets.slice(1).map((b, i) => (
                         <p key={i}>• {b}</p>
                       ))}
@@ -168,7 +176,7 @@ export default function Experience() {
                   {exp.bullets.length > 1 && (
                     <button
                       onClick={() => toggleRole(index)}
-                      className="mt-2 text-[10px] font-mono uppercase text-[#8a8178] hover:text-[#262220] underline cursor-pointer"
+                      className="mt-1.5 text-[9px] font-mono uppercase text-[#8a8178] hover:text-[#262220] underline cursor-pointer"
                     >
                       {isExpanded ? 'Less Details' : '+ More Contributions'}
                     </button>

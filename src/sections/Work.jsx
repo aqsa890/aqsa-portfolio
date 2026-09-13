@@ -18,6 +18,7 @@ const projects = [
     link: 'https://github.com/aqsa890/atelier-storefront',
     linkType: 'GitHub Repository',
     summary: 'Architected multi-stage Docker builds reducing image sizes by 75% and automated multi-job GitHub Actions CI/CD pipelines with sub-millisecond query optimization.',
+    mobileSummary: 'Multi-stage Docker builds slashing image size by 75% with automated GitHub Actions CI/CD.',
     devopsFocus: [
       'Multi-stage Docker containerization with Alpine minimal runtimes, reducing frontend image size by 75% and backend microservice to ~60MB.',
       'Automated multi-job GitHub Actions CI/CD pipelines with linting, test gates (Pytest + Vitest), and dynamic SHA-based Docker Hub image publishing.',
@@ -37,6 +38,7 @@ const projects = [
     link: 'https://github.com/aqsa890/SecretVault-devsecops',
     linkType: 'GitHub Repository',
     summary: 'Hardened a 5-tier microservices platform, eliminating 235+ vulnerabilities to achieve 0 Critical, 0 High, and 0 OS CVEs using Trivy & Docker Scout.',
+    mobileSummary: 'Hardened 5-tier microservices eliminating 235+ CVEs to achieve 0 Critical & High vulnerabilities.',
     devopsFocus: [
       'Hardened distributed 5-tier microservices platform, eliminating 235+ vulnerabilities to achieve 0 Critical, 0 High, and 0 OS CVEs using Trivy and Docker Scout.',
       'Enforced least-privilege non-root execution (USER 10001) across all workloads with read-only root filesystems and capability drops to mitigate container escapes.',
@@ -56,6 +58,7 @@ const projects = [
     link: 'https://github.com/aqsa890',
     linkType: 'GitHub Repository',
     summary: 'Engineered high-throughput containerized media streaming infrastructure with Docker Compose bridge networks, Redis caching, and automated PR security gates.',
+    mobileSummary: 'Scalable media streaming infrastructure with Docker Compose bridge networks and Redis caching.',
     devopsFocus: [
       'Containerized high-throughput media streaming infrastructure with asynchronous queueing and background image processing workers.',
       'Docker Compose orchestration with isolated internal bridge networks, persistent named volumes for media assets, and automated restart policies.',
@@ -75,6 +78,7 @@ const projects = [
     link: 'https://devpost.com/software/maternity-hub',
     linkType: 'Devpost Showcase',
     summary: 'Built resilient real-time cloud telemetry backend streaming with Firebase Firestore for instant emergency triage and automated alert dispatching (<500ms latency).',
+    mobileSummary: 'Real-time telemetry backend with sub-500ms emergency triage dispatch.',
     devopsFocus: [
       'Resilient real-time cloud telemetry backend with Firebase Firestore streaming for instant emergency triage and automated alert dispatching.',
       'Automated health-check escalation policies and high-availability messaging queues for zero message loss during critical healthcare alerts.',
@@ -142,7 +146,7 @@ export default function Work() {
         </div>
 
         {/* Active Project Card on Mobile */}
-        <div className="bg-[#faf9f6] border border-[#b8b3ac] rounded-sm p-4 shadow-sm flex flex-col gap-4">
+        <div className="bg-[#faf9f6] border border-[#b8b3ac] rounded-sm p-3.5 shadow-sm flex flex-col gap-3">
           
           {/* Project Image Frame */}
           <div className="relative aspect-[16/9] overflow-hidden rounded-sm border border-[#5a524d]/20 bg-[#262220] group">
@@ -164,39 +168,39 @@ export default function Work() {
             </div>
           </div>
 
-          {/* Project Name & Subtitle */}
+          {/* Project Name & Low-Density Subtitle */}
           <div>
-            <h3 className="font-serif text-xl font-medium text-[#262220] leading-tight">
+            <h3 className="font-serif text-lg font-medium text-[#262220] leading-tight">
               {current.name}
             </h3>
-            <p className="text-xs text-[#5a524d] font-sans mt-1 leading-relaxed">
-              {current.summary}
+            <p className="text-[11px] text-[#5a524d] font-sans mt-1 leading-snug">
+              {current.mobileSummary || current.summary}
             </p>
           </div>
 
           {/* Key Metrics Pill Row */}
-          <div className="grid grid-cols-3 gap-2 py-2 border-y border-[#d4cfc8] text-center font-mono">
+          <div className="grid grid-cols-3 gap-2 py-1.5 border-y border-[#d4cfc8] text-center font-mono">
             {Object.entries(current.metrics).map(([k, v]) => (
-              <div key={k} className="px-1">
+              <div key={k} className="px-0.5">
                 <span className="block text-xs font-bold text-[#262220]">{v}</span>
-                <span className="block text-[9px] uppercase tracking-wider text-[#8a8178] truncate">{k}</span>
+                <span className="block text-[8px] uppercase tracking-wider text-[#8a8178] truncate">{k}</span>
               </div>
             ))}
           </div>
 
           {/* Tech Badges */}
-          <div className="flex flex-wrap gap-1.5">
-            {current.tech.slice(0, 4).map((tag) => (
+          <div className="flex flex-wrap gap-1">
+            {current.tech.slice(0, 3).map((tag) => (
               <span 
                 key={tag} 
-                className="text-[10px] font-mono uppercase bg-[#edeae6] text-[#3a3532] px-2 py-0.5 rounded border border-[#d4cfc8]"
+                className="text-[9px] font-mono uppercase bg-[#edeae6] text-[#3a3532] px-2 py-0.5 rounded border border-[#d4cfc8]"
               >
                 {tag}
               </span>
             ))}
-            {current.tech.length > 4 && (
-              <span className="text-[10px] font-mono text-[#8a8178] px-1 py-0.5">
-                +{current.tech.length - 4} more
+            {current.tech.length > 3 && (
+              <span className="text-[9px] font-mono text-[#8a8178] px-1 py-0.5">
+                +{current.tech.length - 3} more
               </span>
             )}
           </div>

@@ -50,7 +50,7 @@ const About = ({ onNavigateWork }) => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center my-auto">
         
         {/* Mobile-Only Portrait (Compact & prominent at top for better mobile visual balance) */}
-        <div className="block lg:hidden w-full max-w-[240px] mx-auto">
+        <div className="block lg:hidden w-full max-w-[200px] mx-auto">
           <div 
             onClick={() => setIsColorActive(prev => !prev)}
             className="relative aspect-square overflow-hidden rounded-sm border border-[#262220]/20 bg-[#edeae6] shadow-xl cursor-pointer select-none group/img"
@@ -87,17 +87,33 @@ const About = ({ onNavigateWork }) => {
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
           >
-            <motion.h3 
-              variants={fadeUp} 
-              className="font-serif leading-[1.2] tracking-tight text-[#262220] mb-4 md:mb-6 font-normal"
-              style={{ fontSize: 'clamp(1.25rem, 3.2vw, 2.75rem)' }}
-            >
-              Hi, I’m Aqsa — a DevOps & Cloud Engineer specialized in architecting zero-vulnerability container platforms, automating multi-stage CI/CD pipelines, and securing mission-critical infrastructure.
-            </motion.h3>
+            {/* Mobile Low-Text Version */}
+            <div className="block md:hidden">
+              <motion.h3 
+                variants={fadeUp} 
+                className="font-serif text-base font-normal leading-snug tracking-tight text-[#262220] mb-2"
+              >
+                DevOps & Cloud Engineer architecting zero-vulnerability container platforms.
+              </motion.h3>
+              <motion.p variants={fadeUp} className="text-[11px] text-[#5a524d] leading-relaxed font-light mb-3">
+                High Honors BSSE graduate (3.86 CGPA) specializing in CI/CD automation, Docker/K8s security hardening, and resilient AWS cloud infrastructure.
+              </motion.p>
+            </div>
 
-            <motion.p variants={fadeUp} className="text-xs md:text-base text-[#5a524d] leading-relaxed max-w-2xl mb-6 font-light">
-              Holding High Honors in Software Engineering (3.86/4.00 CGPA), I bridge modern software architecture with robust cloud reliability. From eliminating 235+ microservice CVEs to sub-second real-time telemetry streaming, I approach platform engineering as a craft of precision and security.
-            </motion.p>
+            {/* Desktop Full Magazine Text */}
+            <div className="hidden md:block">
+              <motion.h3 
+                variants={fadeUp} 
+                className="font-serif leading-[1.2] tracking-tight text-[#262220] mb-4 md:mb-6 font-normal"
+                style={{ fontSize: 'clamp(1.25rem, 3.2vw, 2.75rem)' }}
+              >
+                Hi, I’m Aqsa — a DevOps & Cloud Engineer specialized in architecting zero-vulnerability container platforms, automating multi-stage CI/CD pipelines, and securing mission-critical infrastructure.
+              </motion.h3>
+
+              <motion.p variants={fadeUp} className="text-sm md:text-base text-[#5a524d] leading-relaxed max-w-2xl mb-6 font-light">
+                Holding High Honors in Software Engineering (3.86/4.00 CGPA), I bridge modern software architecture with robust cloud reliability. From eliminating 235+ microservice CVEs to sub-second real-time telemetry streaming, I approach platform engineering as a craft of precision and security.
+              </motion.p>
+            </div>
             
             {/* Action link */}
             <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-4 md:gap-6">
