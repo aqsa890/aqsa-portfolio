@@ -1,240 +1,73 @@
-import React, { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { ShieldCheck, Award, ArrowRight } from 'lucide-react';
-import aqsaPhoto from '../assets/aqsa_pfp_bottom_left.jpg';
+import React from 'react';
+import { motion } from 'framer-motion';
 
-const About = ({ onNavigateWork }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-  const [isColorActive, setIsColorActive] = useState(false);
-
-  const fadeUp = {
-    hidden: { y: 35, opacity: 0 },
-    visible: { 
-      y: 0, 
-      opacity: 1, 
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } 
-    }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { staggerChildren: 0.15 } 
-    }
-  };
-
+export default function About() {
   return (
-    <section 
-      id="about" 
-      ref={ref}
-      className="panel relative flex flex-col justify-between w-full md:w-[100vw] shrink-0 min-h-screen md:h-screen bg-[#faf9f6] text-[#262220] px-5 pt-20 pb-8 md:pl-28 md:pr-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
-    >
-      {/* Header Row */}
-      <div className="flex justify-between items-center border-b border-[#262220]/10 pb-3 mb-4 md:mb-6 shrink-0 w-full">
-        <div className="flex items-baseline gap-2 sm:gap-4">
-          <span className="font-serif text-base sm:text-lg md:text-xl font-normal uppercase leading-none tracking-tight text-[#262220] whitespace-nowrap">
-            Chapter I
-          </span>
-          <span className="hidden sm:inline text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono whitespace-nowrap">
-            — Engineering Philosophy
-          </span>
-        </div>
-        <span className="text-[10px] sm:text-xs uppercase tracking-widest font-mono text-[#8a8178] whitespace-nowrap">
-          01. Quick Intro
-        </span>
+    <section id="about" className="relative w-full bg-[#0a0a0a] text-[#f4f4f4] pt-14 sm:pt-20 pb-16 sm:pb-28 px-4 sm:px-10 md:px-20 overflow-hidden">
+      {/* 5-Column Grid Lines in Dark Theme */}
+      <div className="montreal-grid-lines montreal-grid-lines-dark" aria-hidden="true">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center my-auto">
-        
-        {/* Mobile-Only Portrait (Compact & prominent at top for better mobile visual balance) */}
-        <div className="block lg:hidden w-full max-w-[200px] mx-auto">
-          <div 
-            onClick={() => setIsColorActive(prev => !prev)}
-            className="relative aspect-square overflow-hidden rounded-sm border border-[#262220]/20 bg-[#edeae6] shadow-xl cursor-pointer select-none group/img"
-            title="Tap to toggle color"
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Animated Accent Line SVG */}
+        <div className="mb-8 sm:mb-12 overflow-hidden">
+          <svg
+            className="w-full h-6 sm:h-8 text-[#efe41f]"
+            viewBox="0 0 1200 40"
+            fill="none"
+            preserveAspectRatio="none"
           >
-            <img 
-              src={aqsaPhoto} 
-              alt="Aqsa — DevOps Engineer" 
-              className={`w-full h-full object-cover object-top transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                isColorActive 
-                  ? 'grayscale-0 contrast-100 brightness-100 scale-105 saturate-110' 
-                  : 'grayscale contrast-125 brightness-90'
-              }`}
-              loading="eager"
+            <motion.path
+              d="M0,20 Q300,35 600,10 T1200,25"
+              stroke="currentColor"
+              strokeWidth="2"
+              fill="none"
+              initial={{ pathLength: 0, opacity: 0 }}
+              whileInView={{ pathLength: 1, opacity: 0.8 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.8, ease: 'easeInOut' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#262220]/50 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute inset-2 border border-white/20 pointer-events-none" />
-            
-            <div className="absolute top-2 right-2 text-[9px] font-mono uppercase tracking-wider text-white/90 bg-[#262220]/85 backdrop-blur-sm px-2 py-0.5 rounded-sm border border-white/15">
-              {isColorActive ? '● Vivid Color' : '○ Tap for Color'}
-            </div>
-
-            <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between text-[9px] font-mono uppercase tracking-wider text-white/95 bg-[#262220]/85 backdrop-blur-sm px-2.5 py-1 rounded-sm border border-white/15">
-              <span className="font-serif">Aqsa</span>
-              <span>DevSecOps & Cloud</span>
-            </div>
-          </div>
+          </svg>
         </div>
 
-        {/* Left Text & Bio Column */}
-        <div className="lg:col-span-8 flex flex-col justify-center">
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-          >
-            {/* Mobile Low-Text Version */}
-            <div className="block md:hidden text-center sm:text-left">
-              <motion.h3 
-                variants={fadeUp} 
-                className="font-serif text-base font-normal leading-snug tracking-tight text-[#262220] mb-2"
-              >
-                DevOps & Cloud Engineer architecting zero-vulnerability container platforms.
-              </motion.h3>
-              <motion.p variants={fadeUp} className="text-[11px] text-[#5a524d] leading-relaxed font-light mb-3">
-                High Honors BSSE graduate (3.86 CGPA) specializing in CI/CD automation, Docker/K8s security hardening, and resilient AWS cloud infrastructure.
-              </motion.p>
-            </div>
-
-            {/* Desktop Full Magazine Text */}
-            <div className="hidden md:block">
-              <motion.h3 
-                variants={fadeUp} 
-                className="font-serif leading-[1.2] tracking-tight text-[#262220] mb-4 md:mb-6 font-normal"
-                style={{ fontSize: 'clamp(1.25rem, 3.2vw, 2.75rem)' }}
-              >
-                Hi, I’m Aqsa — a DevOps & Cloud Engineer specialized in architecting zero-vulnerability container platforms, automating multi-stage CI/CD pipelines, and securing mission-critical infrastructure.
-              </motion.h3>
-
-              <motion.p variants={fadeUp} className="text-sm md:text-base text-[#5a524d] leading-relaxed max-w-2xl mb-6 font-light">
-                Holding High Honors in Software Engineering (3.86/4.00 CGPA), I bridge modern software architecture with robust cloud reliability. From eliminating 235+ microservice CVEs to sub-second real-time telemetry streaming, I approach platform engineering as a craft of precision and security.
-              </motion.p>
-            </div>
-            
-            {/* Action link */}
-            <motion.div variants={fadeUp} className="flex flex-wrap items-center justify-center sm:justify-start gap-4 md:gap-6">
-              <button 
-                onClick={onNavigateWork}
-                className="inline-flex items-center gap-2 group text-[11px] md:text-xs font-mono uppercase tracking-widest border-b border-[#262220] pb-1 hover:text-[#8a8178] hover:border-[#8a8178] transition-colors cursor-pointer"
-              >
-                <span>Explore Selected Works (Chapter II)</span>
-                <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
-              </button>
-
-              <a 
-                href="/cv.html" 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] md:text-xs font-mono uppercase tracking-widest text-[#8a8178] hover:text-[#262220] transition-colors"
-              >
-                Open Full CV ↗
-              </a>
-            </motion.div>
-
-            {/* Bio Details Grid */}
-            <motion.div 
-              variants={fadeUp} 
-              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mt-6 md:mt-8 pt-5 border-t border-[#262220]/10 text-[11px] md:text-xs font-mono max-w-md mx-auto sm:max-w-none w-full"
-            >
-              <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-                <span className="text-[#8a8178] mb-0.5 uppercase tracking-widest text-[9px] md:text-[10px]">Education</span>
-                <span className="font-semibold text-[#262220]">BSSE, CUSIT</span>
-                <span className="text-[#5a524d]">2022 – 2026</span>
-              </div>
-              <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-                <span className="text-[#8a8178] mb-0.5 uppercase tracking-widest text-[9px] md:text-[10px]">Academics</span>
-                <span className="font-semibold text-[#262220]">CGPA: 3.86 / 4.00</span>
-                <span className="text-[#5a524d]">High Honors</span>
-              </div>
-              <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-                <span className="text-[#8a8178] mb-0.5 uppercase tracking-widest text-[9px] md:text-[10px]">Location</span>
-                <span className="font-semibold text-[#262220]">Peshawar, PK</span>
-                <span className="text-[#5a524d]">GMT+5 Timezone</span>
-              </div>
-              <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-                <span className="text-[#8a8178] mb-0.5 uppercase tracking-widest text-[9px] md:text-[10px]">Primary Focus</span>
-                <span className="font-semibold text-[#262220]">DevSecOps & AWS</span>
-                <span className="text-[#5a524d]">Docker / K8s / IaC</span>
-              </div>
-            </motion.div>
-          </motion.div>
+        {/* Engineer Tag */}
+        <div className="flex items-center gap-2 mb-4 sm:mb-6">
+          <span className="w-2 h-2 rounded-full bg-[#efe41f]"></span>
+          <span className="text-[11px] sm:text-sm font-mono tracking-widest text-[#efe41f] uppercase">
+            DevOps Engineer • DevSecOps • Cloud Infrastructure
+          </span>
         </div>
 
-        {/* Desktop Portrait Column (Hidden on Mobile) */}
-        <div className="hidden lg:flex lg:col-span-4 justify-end">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-full max-w-xs md:max-w-sm relative group"
-          >
-            {/* Portrait Frame — B&W by default, colorful on hover or click */}
-            <div 
-              onClick={() => setIsColorActive(prev => !prev)}
-              className="relative aspect-square md:aspect-[4/5] overflow-hidden rounded-sm border border-[#262220]/20 bg-[#edeae6] shadow-2xl cursor-pointer select-none group/img"
-              title="Click or hover to toggle vivid color"
-            >
-              <img 
-                src={aqsaPhoto} 
-                alt="Aqsa — DevOps Engineer & Cloud Architect" 
-                className={`w-full h-full object-cover object-top transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-                  isColorActive 
-                    ? 'grayscale-0 contrast-100 brightness-100 scale-105 saturate-110' 
-                    : 'grayscale contrast-125 brightness-90 group-hover/img:grayscale-0 group-hover/img:contrast-100 group-hover/img:brightness-100 group-hover/img:scale-105 group-hover/img:saturate-110'
-                }`}
-                loading="eager"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#262220]/50 via-transparent to-transparent pointer-events-none" />
-              
-              {/* Corner Frame Lines */}
-              <div className="absolute inset-3 border border-white/25 pointer-events-none transition-transform group-hover/img:scale-[0.98]" />
-              
-              {/* Interactive Color Status Badge */}
-              <div className="absolute top-3 right-3 text-[9px] font-mono uppercase tracking-wider text-white/90 bg-[#262220]/85 backdrop-blur-sm px-2 py-1 rounded-sm border border-white/15 transition-all">
-                {isColorActive ? '● Vivid Color' : '○ B&W · Tap / Hover for Color'}
-              </div>
+        {/* Giant Manifesto Headline */}
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="display-s text-[#f4f4f4] font-extrabold max-w-6xl mb-8 sm:mb-16 leading-[1.08] tracking-tight uppercase"
+        >
+          Architecting automated CI/CD pipelines, containerized microservices, and zero-vulnerability cloud platforms.
+        </motion.h2>
 
-              {/* Editorial Caption Badge */}
-              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[10px] font-mono uppercase tracking-wider text-white/95 bg-[#262220]/85 backdrop-blur-sm px-3 py-1.5 rounded-sm border border-white/15">
-                <span className="font-serif">Aqsa</span>
-                <span>DevOps · DevSecOps</span>
-              </div>
-            </div>
-
-            {/* Subtle floating citation */}
-            <p className="mt-3 text-[11px] font-mono text-[#8a8178] italic text-right">
-              "Shift security left; engineer resilience from the ground up."
+        {/* Two Column Narrative / Professional Summary */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 lg:gap-20 text-[#c7c7c7] font-body text-sm sm:text-base md:text-lg leading-relaxed border-t border-white/10 pt-8 sm:pt-12">
+          <div>
+            <p>
+              Results-driven Engineer specialized in DevOps, DevSecOps, and Cloud Infrastructure. Hands-on expertise architecting automated CI/CD pipelines with GitHub Actions, containerizing microservices with Docker, and hardening multi-tier platforms to achieve 0 Critical/High vulnerabilities using Trivy and Docker Scout.
             </p>
-          </motion.div>
-        </div>
-
-      </div>
-
-      {/* Stats Row */}
-      <div className="border-t border-[#262220]/10 pt-3 md:pt-4 grid grid-cols-2 md:grid-cols-4 divide-x divide-[#262220]/10 text-center">
-        <div className="px-2 md:px-3">
-          <span className="font-serif text-xl md:text-3xl font-normal text-[#262220] block">04</span>
-          <span className="text-[9px] md:text-[10px] font-mono uppercase tracking-widest text-[#8a8178]">Production Projects</span>
-        </div>
-        <div className="px-2 md:px-3">
-          <span className="font-serif text-xl md:text-3xl font-normal text-[#262220] block">04</span>
-          <span className="text-[9px] md:text-[10px] font-mono uppercase tracking-widest text-[#8a8178]">Industry Internships</span>
-        </div>
-        <div className="px-2 md:px-3">
-          <span className="font-serif text-xl md:text-3xl font-normal text-[#262220] block">3.86</span>
-          <span className="text-[9px] md:text-[10px] font-mono uppercase tracking-widest text-[#8a8178]">BSSE Honors CGPA</span>
-        </div>
-        <div className="px-2 md:px-3">
-          <span className="font-serif text-xl md:text-3xl font-normal text-[#262220] block">0</span>
-          <span className="text-[9px] md:text-[10px] font-mono uppercase tracking-widest text-[#8a8178]">Critical Vulnerabilities</span>
+          </div>
+          <div>
+            <p>
+              Proficient in AWS cloud infrastructure, automating deployments via Bash and Python scripts, integrating shift-left security gates (SAST, DAST, SCA, Secret Scanning, Linting), and proactively monitoring system health with real-time observability.
+            </p>
+          </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default About;
+}

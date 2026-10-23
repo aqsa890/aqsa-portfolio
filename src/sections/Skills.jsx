@@ -1,283 +1,299 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Shield, GitBranch, Box, Cloud, Activity, Terminal, ChevronLeft, ChevronRight, Layers } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  ShieldAlert,
+  GitBranch,
+  Box,
+  Cloud,
+  Activity,
+  Terminal,
+  GitPullRequest,
+  CheckCircle2,
+} from 'lucide-react';
 
-const skillCategories = [
+const SKILL_CATEGORIES = [
   {
-    icon: Shield,
+    num: '01',
+    id: 'devsecops',
     name: 'DevSecOps & Security',
-    shortName: 'Security',
-    code: 'SEC-01',
-    description: 'Shift-left security gates, automated vulnerability scanning, container hardening, and secret detection.',
-    mobileDesc: 'Shift-left automated vulnerability scanning and container hardening.',
-    skills: ['Trivy', 'Docker Scout', 'Gitleaks', 'SonarQube', 'Semgrep', 'Checkov', 'Actionlint', 'SAST / DAST', 'Secret Scanning', 'Shift-Left Gates']
+    icon: ShieldAlert,
+    tagline: 'Shift-Left Vulnerability Remediation & Container Hardening',
+    color: '#efe41f',
+    skills: [
+      'SAST & DAST Gates',
+      'SCA Scanning',
+      'Secret Scanning',
+      'Container Security',
+      'Linting & Actionlint',
+      'IaC Security (Checkov)',
+      'Trivy Scanner',
+      'Gitleaks',
+      'Docker Scout',
+      'SonarQube Quality Gates',
+      'Semgrep SAST',
+      'Shift-Left Pipeline Gates',
+    ],
   },
   {
-    icon: GitBranch,
+    num: '02',
+    id: 'cicd',
     name: 'CI/CD & Automation',
-    shortName: 'CI/CD',
-    code: 'CICD-02',
-    description: 'Zero-touch deployment pipelines, dynamic SHA tagging, and automated regression testing.',
-    mobileDesc: 'Automated CI/CD with dynamic SHA tagging & registry push gates.',
-    skills: ['GitHub Actions', 'Jenkins', 'Self-Hosted EC2 Runners', 'Multi-Job Pipelines', 'SHA Dynamic Tagging', 'Docker Hub Registry', 'Argo CD (GitOps)']
+    icon: GitBranch,
+    tagline: 'Zero-Touch Multi-Job Pipelines & Dynamic Tagging',
+    color: '#f4f4f4',
+    skills: [
+      'GitHub Actions',
+      'Jenkins Automation',
+      'Self-Hosted EC2 Runners',
+      'Multi-Job Pipelines',
+      'Dynamic SHA-Based Tagging',
+      'Docker Hub Registry',
+      'Argo CD (GitOps)',
+      'Automated Testing Workflows',
+      'Automated Linting',
+    ],
   },
   {
-    icon: Box,
+    num: '03',
+    id: 'containers',
     name: 'Containers & Orchestration',
-    shortName: 'Containers',
-    code: 'K8S-03',
-    description: 'Multi-stage Docker optimization, minimal Alpine runtimes, and non-root execution policies.',
-    mobileDesc: 'Multi-stage Docker builds and least-privilege non-root policies.',
-    skills: ['Docker', 'Docker Compose', 'Kubernetes', 'Helm', 'Multi-Stage Builds', 'Image Optimization', 'Non-Root (USER 10001)', 'Alpine Runtimes']
+    icon: Box,
+    tagline: 'Multi-Stage Optimization & Self-Healing Clusters',
+    color: '#efe41f',
+    skills: [
+      'Docker',
+      'Docker Compose',
+      'Kubernetes (K8s)',
+      'Helm Charts',
+      'Multi-Stage Builds',
+      'Image Optimization',
+      'Container Hardening',
+      'Non-Root Workloads (USER 10001)',
+      'Alpine & Distroless Runtimes',
+    ],
   },
   {
+    num: '04',
+    id: 'aws',
+    name: 'Cloud & Infrastructure (AWS)',
     icon: Cloud,
-    name: 'Cloud Infrastructure (AWS)',
-    shortName: 'AWS Cloud',
-    code: 'AWS-04',
-    description: 'Hardened VPC network topology, scalable compute clusters, and granular IAM policies.',
-    mobileDesc: 'Hardened VPC network topology, ALB balancing, and IAM policies.',
-    skills: ['EC2', 'VPC Architecture', 'S3', 'IAM Roles & Policies', 'ALB Load Balancers', 'Auto Scaling Groups', 'NAT Gateway', 'Security Groups / NACLs']
+    tagline: 'High-Availability Multi-Tier VPCs & Resilient Architectures',
+    color: '#00e5ff',
+    skills: [
+      'AWS EC2 Compute',
+      'VPC Architecture & Subnets',
+      'S3 Object Storage',
+      'IAM Least-Privilege Roles',
+      'Application Load Balancer (ALB)',
+      'Auto Scaling Groups (ASG)',
+      'NAT Gateway & Route Tables',
+      'Security Groups & NACLs',
+      'AWS Systems Manager (SSM)',
+      'Launch Templates & User Data',
+      'AWS CLI Automation',
+    ],
   },
   {
-    icon: Activity,
+    num: '05',
+    id: 'sre',
     name: 'Observability & SRE',
-    shortName: 'Observability',
-    code: 'SRE-05',
-    description: 'Real-time telemetry, automated uptime monitoring, container health probes, and alert escalation.',
-    mobileDesc: 'Container health telemetry, metrics tracking, and automated alerting.',
-    skills: ['Prometheus', 'Grafana Dashboards', 'Container Health Checks', 'Metrics Telemetry', 'Automated Alerting', 'Incident Root Cause Analysis']
+    icon: Activity,
+    tagline: 'Real-Time Telemetry, Incident Remediation & SLA Probing',
+    color: '#efe41f',
+    skills: [
+      'Prometheus Telemetry',
+      'Grafana Visual Dashboards',
+      'Container Health Checks',
+      'Metrics Collection',
+      'Uptime & System Monitoring',
+      'Automated Alerting',
+      'Service Reliability (SRE)',
+      'Incident Root-Cause Troubleshooting',
+    ],
   },
   {
+    num: '06',
+    id: 'iac',
+    name: 'IaC & Systems Automation',
     icon: Terminal,
-    name: 'IaC & Linux Systems',
-    shortName: 'IaC & Linux',
-    code: 'IAC-06',
-    description: 'Declarative infrastructure as code, automated configuration management, and server administration.',
-    mobileDesc: 'Declarative Terraform IaC, Ansible automation, and Linux admin.',
-    skills: ['Terraform (Declarative IaC)', 'Ansible (Config Mgmt)', 'Linux Administration (LVM, SSH)', 'Bash Automation', 'Python Automation', 'Nginx Reverse Proxy']
-  }
-];
-
-const metrics = [
-  { label: 'Critical CVEs Across Builds', value: '0' },
-  { label: 'Container Image Size Slashed', value: '75%' },
-  { label: 'Automated CI/CD Quality Gates', value: '100%' },
-  { label: 'Sub-Second Telemetry SLA', value: '99.9%' }
+    tagline: 'Declarative Infrastructure, Server Hardening & Shell Scripting',
+    color: '#f4f4f4',
+    skills: [
+      'Terraform (Declarative IaC)',
+      'Ansible (Config Management)',
+      'Linux Administration',
+      'LVM Partitioning & SSH',
+      'Process & Storage Mgmt',
+      'Bash / Shell Scripting',
+      'Python Automation Scripts',
+      'Nginx Reverse Proxy',
+      'Automated Cron Jobs',
+    ],
+  },
+  {
+    num: '07',
+    id: 'workflow',
+    name: 'Version Control & Workflow',
+    icon: GitPullRequest,
+    tagline: 'Branch Protection, Rigorous Reviews & Agile Delivery',
+    color: '#efe41f',
+    skills: [
+      'Git Version Control',
+      'GitHub Branch Protection',
+      'Pull Request Code Reviews',
+      'Pre-Commit Security Hooks',
+      'Jira Task Tracking',
+      'Agile / Scrum Delivery',
+      'Enterprise SDLC',
+    ],
+  },
 ];
 
 export default function Skills() {
-  const [activeDomain, setActiveDomain] = useState(0);
-  const [showAllMobile, setShowAllMobile] = useState(false);
-
-  const currentCategory = skillCategories[activeDomain];
-  const CurrentIcon = currentCategory.icon;
+  const [activeCategory, setActiveCategory] = useState(SKILL_CATEGORIES[0]);
 
   return (
-    <section 
-      id="skills" 
-      className="panel relative flex flex-col justify-between w-full md:w-[125vw] lg:w-[110vw] shrink-0 min-h-screen md:h-screen bg-[#262220] text-[#f3eee8] px-5 pt-20 pb-8 md:pl-28 md:pr-16 md:py-12 overflow-y-auto md:overflow-hidden select-none"
-    >
-      {/* Top Header */}
-      <div className="flex items-center justify-between border-b border-[#5a524d] pb-3 mb-3 md:mb-6 shrink-0 w-full">
-        <div className="flex items-baseline gap-2 sm:gap-4">
-          <span className="font-serif text-base sm:text-lg md:text-xl font-normal uppercase leading-none tracking-tight text-[#f3eee8] whitespace-nowrap">
-            Chapter III
-          </span>
-          <span className="hidden sm:inline text-xs uppercase tracking-[0.2em] text-[#8a8178] font-mono whitespace-nowrap">
-            — Technical Arsenal
-          </span>
-        </div>
-        <span className="text-[10px] sm:text-xs uppercase tracking-widest font-mono text-[#8a8178] whitespace-nowrap">
-          03. Capabilities
-        </span>
+    <section id="skills" className="relative w-full bg-[#0a0a0a] text-[#f4f4f4] py-16 sm:py-24 px-3.5 sm:px-10 overflow-hidden select-none">
+      {/* 5-Column Grid Lines */}
+      <div className="montreal-grid-lines montreal-grid-lines-dark" aria-hidden="true">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
 
-      {/* Main Content Area */}
-      <div className="my-auto">
-        <div className="mb-3 md:mb-6">
-          {/* Mobile Headline: Low Text */}
-          <h3 className="block md:hidden font-serif text-base font-normal leading-snug uppercase text-[#f3eee8]">
-            Hardened Containers & Cloud Infrastructure.
-          </h3>
-          {/* Desktop Headline */}
-          <h3 className="hidden md:block font-serif text-xl md:text-4xl font-normal leading-snug uppercase text-[#f3eee8] max-w-4xl">
-            Automating Deployment, Hardening Containers & Securing Cloud Topology.
-          </h3>
-        </div>
-
-        {/* ─── MOBILE VIEW: Interactive Domain Tabs & Low-Density Card ─── */}
-        <div className="block md:hidden mb-3">
-          {/* Domain Pills Scroll */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-2 mb-2.5">
-            {skillCategories.map((cat, idx) => {
-              const isActive = activeDomain === idx;
-              return (
-                <button
-                  key={cat.code}
-                  onClick={() => {
-                    setActiveDomain(idx);
-                    setShowAllMobile(false);
-                  }}
-                  className={`px-2.5 py-1 rounded-sm font-mono text-[10px] uppercase tracking-wider shrink-0 transition-all cursor-pointer ${
-                    isActive && !showAllMobile
-                      ? 'bg-[#f3eee8] text-[#262220] font-bold shadow-md'
-                      : 'bg-[#1e1b19] text-[#a39b92] border border-[#453e3a]'
-                  }`}
-                >
-                  {cat.shortName}
-                </button>
-              );
-            })}
+      <div className="relative z-10 max-w-6xl mx-auto">
+        {/* Section Header */}
+        <div className="mb-10 sm:mb-14 text-center sm:text-left">
+          <div className="flex items-center justify-center sm:justify-start gap-2 mb-2.5">
+            <span className="w-2 h-2 rounded-full bg-[#efe41f]"></span>
+            <span className="text-xs font-mono uppercase tracking-widest text-[#efe41f]">
+              Technical Arsenal
+            </span>
           </div>
-
-          {!showAllMobile ? (
-            /* Featured Single Category Card on Mobile: Low Density */
-            <div className="border border-[#5a524d] p-3.5 rounded-sm bg-[#1e1b19] shadow-lg flex flex-col gap-2.5">
-              <div className="flex items-center justify-between border-b border-[#38332f] pb-2">
-                <div className="flex items-center gap-2">
-                  <CurrentIcon className="w-3.5 h-3.5 text-[#d4cfc8]" />
-                  <h4 className="font-serif text-sm text-[#f3eee8] font-medium">
-                    {currentCategory.name}
-                  </h4>
-                </div>
-                <span className="font-mono text-[9px] text-[#8a8178] tracking-widest bg-[#2a2623] px-1.5 py-0.5 rounded border border-[#38332f]">
-                  {currentCategory.code}
-                </span>
-              </div>
-
-              <p className="text-[11px] text-[#a39b92] leading-relaxed font-light">
-                {currentCategory.mobileDesc || currentCategory.description}
-              </p>
-
-              <div className="pt-1">
-                <div className="flex flex-wrap gap-1">
-                  {currentCategory.skills.slice(0, 5).map((skill) => (
-                    <span 
-                      key={skill}
-                      className="text-[10px] font-mono text-[#f3eee8] bg-[#2a2623] px-2 py-0.5 rounded-sm border border-[#453e3a]"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                  {currentCategory.skills.length > 5 && (
-                    <span className="text-[10px] font-mono text-[#8a8178] px-1.5 py-0.5">
-                      +{currentCategory.skills.length - 5} more
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* Navigation Bar between domains */}
-              <div className="flex items-center justify-between pt-2 border-t border-[#38332f] text-[11px] font-mono">
-                <button
-                  onClick={() => setActiveDomain((prev) => (prev > 0 ? prev - 1 : skillCategories.length - 1))}
-                  className="flex items-center gap-1 text-[#8a8178] hover:text-[#f3eee8] py-0.5 cursor-pointer"
-                >
-                  <ChevronLeft size={13} />
-                  <span>Prev</span>
-                </button>
-
-                <button
-                  onClick={() => setShowAllMobile(true)}
-                  className="text-[9px] text-[#8a8178] hover:text-[#f3eee8] uppercase tracking-wider underline cursor-pointer"
-                >
-                  View All (6)
-                </button>
-
-                <button
-                  onClick={() => setActiveDomain((prev) => (prev < skillCategories.length - 1 ? prev + 1 : 0))}
-                  className="flex items-center gap-1 text-[#8a8178] hover:text-[#f3eee8] py-0.5 cursor-pointer"
-                >
-                  <span>Next</span>
-                  <ChevronRight size={13} />
-                </button>
-              </div>
-            </div>
-          ) : (
-            /* Compact All-Domains View when user clicks "View All" */
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-[11px] font-mono text-[#8a8178] uppercase">Showing All 6 Disciplines</span>
-                <button
-                  onClick={() => setShowAllMobile(false)}
-                  className="text-[11px] font-mono text-[#f3eee8] underline cursor-pointer"
-                >
-                  Show Tabbed View
-                </button>
-              </div>
-              {skillCategories.map((cat) => {
-                const Icon = cat.icon;
-                return (
-                  <div key={cat.code} className="border border-[#453e3a] p-3 rounded-sm bg-[#1e1b19]">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <Icon className="w-3.5 h-3.5 text-[#8a8178]" />
-                        <h4 className="font-serif text-sm text-[#f3eee8]">{cat.name}</h4>
-                      </div>
-                      <span className="font-mono text-[9px] text-[#8a8178]">{cat.code}</span>
-                    </div>
-                    <div className="flex flex-wrap gap-1">
-                      {cat.skills.map((s) => (
-                        <span key={s} className="text-[10px] font-mono text-[#d4cfc8] bg-[#2a2623] px-2 py-0.5 rounded border border-[#38332f]">
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
+          <h2 className="display-m text-[#f4f4f4] font-extrabold tracking-tight">
+            TECHNICAL SKILLS
+          </h2>
+          <p className="font-body text-xs sm:text-sm text-[#c7c7c7] max-w-2xl mt-2">
+            Comprehensive production capabilities across DevSecOps, multi-cloud infrastructure, container orchestration, and continuous automation.
+          </p>
         </div>
 
-        {/* ─── DESKTOP VIEW: Full 6-Card High-Density Editorial Grid ─── */}
-        <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
-          {skillCategories.map((category) => {
-            const Icon = category.icon;
+        {/* 7-Category Tab Selector Bar (Horizontal Touch Scroll on Mobile) */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-6 sm:mb-8 -mx-3.5 px-3.5 sm:mx-0 sm:px-0">
+          {SKILL_CATEGORIES.map((cat) => {
+            const isActive = activeCategory.id === cat.id;
             return (
-              <div 
-                key={category.name}
-                className="border border-[#453e3a] p-5 rounded-sm bg-[#1e1b19]/60 hover:bg-[#1e1b19] hover:border-[#8a8178] transition-all duration-300 group flex flex-col justify-between"
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => setActiveCategory(cat)}
+                className={`px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-mono uppercase tracking-wider transition-all whitespace-nowrap flex items-center gap-1.5 sm:gap-2 shrink-0 ${
+                  isActive
+                    ? 'bg-[#efe41f] text-[#0a0a0a] font-bold shadow-md'
+                    : 'bg-[#141414] text-[#c7c7c7] border border-white/10 hover:border-white/30 hover:text-white'
+                }`}
               >
-                <div>
-                  <div className="flex items-center justify-between mb-3 border-b border-[#38332f] pb-2">
-                    <div className="flex items-center gap-2.5">
-                      <Icon className="w-4 h-4 text-[#8a8178] group-hover:text-[#f3eee8] transition-colors" />
-                      <h4 className="font-serif text-base text-[#f3eee8] font-normal">
-                        {category.name}
-                      </h4>
-                    </div>
-                    <span className="font-mono text-[10px] text-[#8a8178] tracking-widest">
-                      {category.code}
-                    </span>
-                  </div>
-
-                  <div className="flex flex-wrap gap-1.5 mt-3">
-                    {category.skills.map((skill) => (
-                      <span 
-                        key={skill}
-                        className="text-[11px] font-mono text-[#d4cfc8] bg-[#2a2623] px-2 py-1 rounded-sm border border-[#38332f]"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
+                <span>({cat.num})</span>
+                <span>{cat.name}</span>
+              </button>
             );
           })}
         </div>
-      </div>
 
-      {/* Metrics Row */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 pt-3 md:pt-4 border-t border-[#5a524d] text-center font-mono">
-        {metrics.map((m, i) => (
-          <div key={i} className="border-r last:border-r-0 border-[#3a3532] px-1 md:px-2">
-            <span className="font-serif text-xl md:text-3xl text-[#f3eee8] block">{m.value}</span>
-            <span className="text-[9px] md:text-[10px] text-[#8a8178] uppercase tracking-wider block mt-0.5">{m.label}</span>
-          </div>
-        ))}
+        {/* Active Domain Detailed Spotlight Card */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory.id}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.35 }}
+            className="rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-12 bg-gradient-to-br from-[#161616] via-[#121212] to-[#1a1924] border border-[#efe41f]/40 shadow-2xl mb-8 sm:mb-12"
+          >
+            <div className="flex flex-col md:flex-row md:items-center justify-between pb-4 sm:pb-6 mb-5 sm:mb-8 border-b border-white/10 gap-3 sm:gap-4">
+              <div className="flex items-center gap-3 sm:gap-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-[#efe41f] text-[#0a0a0a] flex items-center justify-center shrink-0 shadow-lg">
+                  <activeCategory.icon className="w-6 h-6 sm:w-8 sm:h-8" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono text-[10px] sm:text-xs text-[#efe41f]">
+                      CATEGORY ({activeCategory.num})
+                    </span>
+                  </div>
+                  <h3 className="font-heading text-lg sm:text-3xl md:text-4xl font-extrabold uppercase text-white tracking-tight leading-tight">
+                    {activeCategory.name}
+                  </h3>
+                </div>
+              </div>
+
+              <div className="font-mono text-xs text-[#c7c7c7] md:text-right max-w-sm">
+                {activeCategory.tagline}
+              </div>
+            </div>
+
+            {/* Skill Pills Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3">
+              {activeCategory.skills.map((skill) => (
+                <div
+                  key={skill}
+                  className="flex items-center gap-2.5 sm:gap-3 px-3 py-2 sm:px-4 sm:py-3 rounded-xl bg-white/[0.03] border border-white/10 hover:border-[#efe41f]/50 hover:bg-white/[0.06] transition-all group"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-[#efe41f] shrink-0 group-hover:scale-110 transition-transform" />
+                  <span className="font-mono text-xs sm:text-sm text-white/90 group-hover:text-white truncate">
+                    {skill}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* All 7 Categories Editorial Overview Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          {SKILL_CATEGORIES.map((cat) => (
+            <div
+              key={cat.id}
+              onClick={() => setActiveCategory(cat)}
+              className={`rounded-xl sm:rounded-2xl p-4 sm:p-6 transition-all duration-300 cursor-pointer border flex flex-col justify-between ${
+                activeCategory.id === cat.id
+                  ? 'bg-[#181818] border-[#efe41f]/70 shadow-lg'
+                  : 'bg-[#141414] border-white/10 hover:border-white/25 hover:bg-[#161616]'
+              }`}
+            >
+              <div>
+                <div className="flex justify-between items-center pb-2.5 mb-3 border-b border-white/10 text-xs font-mono">
+                  <span className="text-[#efe41f] font-bold">({cat.num})</span>
+                  <cat.icon className="w-4 h-4 text-[#c7c7c7]" />
+                </div>
+                <h4 className="font-heading text-base sm:text-lg font-bold uppercase text-white mb-1.5 leading-snug">
+                  {cat.name}
+                </h4>
+                <p className="font-body text-xs text-[#c7c7c7] leading-relaxed mb-3.5">
+                  {cat.tagline}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {cat.skills.slice(0, 4).map((s) => (
+                  <span
+                    key={s}
+                    className="px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-mono bg-white/5 border border-white/10 text-white/70"
+                  >
+                    {s}
+                  </span>
+                ))}
+                {cat.skills.length > 4 && (
+                  <span className="px-2 py-0.5 rounded text-[9px] sm:text-[10px] font-mono bg-[#efe41f]/10 text-[#efe41f] border border-[#efe41f]/20">
+                    +{cat.skills.length - 4} more
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

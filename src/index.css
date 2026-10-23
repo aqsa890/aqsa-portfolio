@@ -1,34 +1,23 @@
 @import "tailwindcss";
 
-
-/* ─── CSS Custom Properties ─── */
+/* ─── Montreal Design Tokens & Custom Properties ─── */
 :root {
-  /* Palette — warm monochrome */
-  --color-bg:       #faf9f6;
-  --color-bg-dark:  #262220;
-  --color-bg-warm:  #edeae6;
-  --color-text:     #2e2b28;
-  --color-text-inv: #f3eee8;
-  --color-muted:    #8a8178;
-  --color-border:   #d4cfc8;
-  --color-border-d: #5a524d;
-  --color-accent:   #b8b3ac;
+  /* Montreal Signature Color Palette */
+  --primary:        #efe41f; /* Electric / Acid Chartreuse Yellow */
+  --secondary:      #f4f4f4; /* Clean Architectural Off-White */
+  --black:          #0a0a0a; /* Deep Matte Obsidian Black */
+  --white:          #f4f4f4; /* Clean Editorial Off-White */
+  --grey-100:       #c7c7c7; /* Light Neutral Text */
+  --grey-200:       #686868; /* Mid Slate Text */
+  --grey-300:       #323232; /* Deep Border & Card Stroke */
+  --grey-400:       #181818; /* Surface Dark Charcoal */
+  --accent-orange:  #f67e27; /* Tangerine Accent */
+  --accent-blue:    #3897f0; /* Verified Badge Blue */
 
-  /* Typography scale */
-  --font-serif:  'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono:   'JetBrains Mono', 'Fira Code', monospace;
-
-  /* Spacing scale */
-  --scale: 1vw;
-  --vg: max(2rem, 4vh);
-}
-
-@media (max-width: 768px) {
-  :root {
-    --scale: 2.5vw;
-    --vg: 1.5rem;
-  }
+  /* Typography */
+  --font-heading:   'Zalando Sans Expanded', sans-serif;
+  --font-body:      'Manrope', sans-serif;
+  --font-mono:      'JetBrains Mono', monospace;
 }
 
 /* ─── Base Resets ─── */
@@ -44,37 +33,42 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    background-color: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
   }
 
   body {
-    font-family: var(--font-sans);
-    background-color: var(--color-bg);
-    color: var(--color-text);
+    font-family: var(--font-body);
+    background-color: var(--black);
+    color: var(--white);
     overflow-x: hidden;
-    line-height: 1.6;
+    width: 100%;
+    max-width: 100vw;
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
   }
 
   ::selection {
-    background-color: #2e2b28;
-    color: #faf9f6;
+    background-color: var(--primary);
+    color: var(--black);
   }
 
-  /* Smooth scrollbar */
+  /* Sleek modern scrollbar */
   ::-webkit-scrollbar {
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: var(--black);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--color-muted);
-    border-radius: 3px;
+    background: #323232;
+    border-radius: 9999px;
   }
-
-  /* Focus styles */
-  :focus-visible {
-    outline: 2px solid var(--color-text);
-    outline-offset: 4px;
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
   }
 
   img {
@@ -89,158 +83,274 @@
   }
 }
 
-/* ─── Typography Utilities ─── */
+/* ─── Typography & Heading Hierarchy ─── */
 @layer utilities {
-  .font-serif {
-    font-family: var(--font-serif);
+  .font-heading {
+    font-family: var(--font-heading);
   }
-  .font-sans {
-    font-family: var(--font-sans);
+
+  .font-body {
+    font-family: var(--font-body);
   }
+
   .font-mono {
     font-family: var(--font-mono);
   }
 
-  /* Editorial label — small uppercase tracking */
-  .label {
-    font-family: var(--font-sans);
-    font-size: 0.6875rem;
-    font-weight: 500;
+  /* Giant Display Sizes */
+  .display-l {
+    font-family: var(--font-heading);
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    line-height: 1.2;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    font-size: clamp(2.4rem, 11vw, 15rem);
   }
 
-  .label-lg {
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 500;
+  .display-m {
+    font-family: var(--font-heading);
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    line-height: 1.2;
-  }
-
-  /* Oversized display heading */
-  .heading-display {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    line-height: 0.92;
     letter-spacing: -0.03em;
-    text-transform: uppercase;
+    line-height: 0.95;
+    font-size: clamp(1.75rem, 6.5vw, 6.5rem);
   }
 
-  /* Section heading */
-  .heading-section {
-    font-family: var(--font-serif);
-    font-weight: 400;
+  .display-s {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    font-size: clamp(1.35rem, 3.8vw, 3.25rem);
+  }
+
+  .h1 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4.5vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .h2 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 3.8vw, 3.5rem);
     line-height: 1.1;
     letter-spacing: -0.02em;
   }
 
-  /* Body large */
-  .body-lg {
-    font-family: var(--font-sans);
-    font-size: clamp(1rem, 1.4vw, 1.25rem);
-    font-weight: 400;
+  .h3 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 2.5vw, 2.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .h4 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: clamp(1.15rem, 2vw, 1.75rem);
+    line-height: 1.2;
+  }
+
+  .h5 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: clamp(1rem, 1.5vw, 1.35rem);
+    line-height: 1.25;
+  }
+
+  .h6 {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* Body styles */
+  .body-l {
+    font-family: var(--font-body);
+    font-size: clamp(1.125rem, 1.4vw, 1.25rem);
+    line-height: 1.5;
+  }
+
+  .body-m {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .body-s {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
     line-height: 1.55;
   }
 
-  /* Editorial number */
-  .editorial-num {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    font-size: 0.875rem;
-    line-height: 1;
-  }
-
-  /* Link underline animation */
-  .link-underline {
-    position: relative;
-    display: inline-block;
-  }
-  .link-underline::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: currentColor;
-    transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .link-underline:hover::after {
-    width: 100%;
-  }
-
-  /* Gradient text fade */
-  .text-fade-bottom {
-    mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-  }
-
-  /* Grid line decorators */
-  .grid-line-left {
-    border-left: 1px solid var(--color-border);
-  }
-  .grid-line-right {
-    border-right: 1px solid var(--color-border);
-  }
-  .grid-line-top {
-    border-top: 1px solid var(--color-border);
-  }
-  .grid-line-bottom {
-    border-bottom: 1px solid var(--color-border);
+  .body-xs {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
   }
 }
 
-/* ─── Custom cursor (subtle) ─── */
-@media (pointer: fine) {
-  body {
-    cursor: default;
+/* ─── Montreal Signature Pill Buttons & Double-Slide Hover ─── */
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--white);
+  color: var(--black);
+  padding: 0.45rem 1.1rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(10, 10, 10, 0.12);
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  user-select: none;
+}
+
+.btn-pill:hover {
+  background-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-pill:active {
+  transform: scale(0.97);
+}
+
+.btn-pill-dark {
+  background-color: transparent;
+  color: var(--white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+.btn-pill-dark:hover {
+  background-color: var(--white);
+  color: var(--black);
+  border-color: var(--white);
+}
+
+.btn-pill-yellow {
+  background-color: var(--primary);
+  color: var(--black);
+  border: 1px solid var(--primary);
+}
+
+.btn-pill-yellow:hover {
+  background-color: #f7ee38;
+}
+
+/* Double-text roll up on hover */
+.text-slide-container {
+  display: inline-flex;
+  flex-direction: column;
+  height: 1.15em;
+  overflow: hidden;
+  position: relative;
+}
+
+.text-slide-container span {
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .text-slide-container span,
+.btn-pill:hover .text-slide-container span {
+  transform: translateY(-100%);
+}
+
+/* ─── Vertical Line Overlay Grid ─── */
+.montreal-grid-lines {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.montreal-grid-lines > div {
+  border-right: 1px solid rgba(10, 10, 10, 0.07);
+  height: 100%;
+}
+
+.montreal-grid-lines > div:last-child {
+  border-right: none;
+}
+
+.montreal-grid-lines-dark > div {
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ─── Rotating Badge Animation ─── */
+@keyframes spinClockwise {
+  from {
+    transform: rotate(0deg);
   }
-  a, button, [role="button"] {
-    cursor: pointer;
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* ─── Vertical writing mode ─── */
-.writing-vertical-lr {
-  writing-mode: vertical-lr;
+.spin-slow {
+  animation: spinClockwise 14s linear infinite;
 }
 
-/* ─── Font family overrides ─── */
-.font-serif {
-  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
-}
-.font-sans {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-}
-.font-mono {
-  font-family: 'JetBrains Mono', 'Fira Code', monospace !important;
+/* ─── Sticky Services Stacking Effect ─── */
+.sticky-card {
+  position: sticky;
+  top: 90px;
+  transition: transform 0.3s ease;
 }
 
-/* ─── Page transition ─── */
-.page-enter {
-  opacity: 0;
-  transform: translateY(20px);
-}
-.page-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+/* ─── Transition Grid Cells ─── */
+.transition-grid-wrap {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  height: 50px;
+  width: 100%;
+  pointer-events: none;
 }
 
-/* ─── Horizontal scroll helpers ─── */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+@media (min-width: 640px) {
+  .transition-grid-wrap {
+    height: 90px;
+  }
 }
 
-.panel {
-  scroll-snap-align: start;
+.transition-grid-wrap .grid-cell {
+  background-color: var(--black);
+  height: 100%;
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
 }
 
+.transition-grid-wrap .grid-cell:last-child {
+  border-right: none;
+}
+
+/* ─── Marquee Animation ─── */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
